@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Colonial Skirmish</string>
+    <string name="action_show_hand">Pokaż karty w ręce</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="new_game">Nowa gra</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_select_card">SelectCardActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_select_planet">SelectPlanetActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_select_ship">SelectShipActivity</string>
+    <string name="title_activity_show_space_area">ShowSpaceAreaActivity</string>
+
+</resources>
