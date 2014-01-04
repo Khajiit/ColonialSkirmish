@@ -8,12 +8,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ShowSpaceAreaActivity" >
 
-    <TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+   <android.support.v4.app.FragmentTabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shipTabHost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,29 +26,12 @@
             </TabWidget>
 
             <FrameLayout
-                android:id="@android:id/tabcontent"
+                android:id="@+id/shipTabContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:id="@+id/tab1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tab3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </LinearLayout>
+                
             </FrameLayout>
         </LinearLayout>
-    </TabHost>
+    </android.support.v4.app.FragmentTabHost>
 
 </RelativeLayout>

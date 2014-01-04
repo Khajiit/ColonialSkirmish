@@ -34,6 +34,9 @@ public class GameCard implements Card {
 
 	/* Specifiec if the card was used this turn */
 	protected boolean isActivated;
+	
+	/* Card description */
+	protected String description;
 
 	@Override
 	public void getInitAction() {
@@ -265,6 +268,14 @@ public class GameCard implements Card {
 
 	public void setActivated( boolean isActivated ) {
 		this.isActivated = isActivated;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

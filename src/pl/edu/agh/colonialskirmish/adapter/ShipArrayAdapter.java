@@ -5,11 +5,14 @@ import java.util.Map;
 
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.game.Card;
+import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ShipArrayAdapter extends BaseAdapter {
 
@@ -25,6 +28,7 @@ public class ShipArrayAdapter extends BaseAdapter {
 		int i = 0;
 		for ( Card card : cardMap.keySet() ) {
 			cards[i] = card;
+			i++;
 		}
 	}
 
@@ -51,7 +55,26 @@ public class ShipArrayAdapter extends BaseAdapter {
 		View shipView = inflater.inflate(R.layout.fragment_ship_grid_item,
 				viewGroup, false);
 
-		shipView.setBackgroundResource(R.drawable.spaceship);
+		ImageView image = (ImageView) shipView.findViewById(R.id.shipGridItemImage);
+		image.setBackgroundResource(R.drawable.spaceship);
+		
+		TextView nameTextView = (TextView) shipView.findViewById(R.id.shipGridItemName);
+		TextView kineticTextView = (TextView) shipView.findViewById(R.id.shipGridItemKinetic);
+		TextView energyTextView = (TextView) shipView.findViewById(R.id.shipGridItemEnergy);
+		TextView missleTextView = (TextView) shipView.findViewById(R.id.shipGridItemMissle);
+		
+		Card card = cards[position];
+		try {
+			GameCard gameCard = (GameCard) card;
+			nameTextView.setText(gameCard.getName());
+			kineticTextView.setText(gameCard.getKineticAtt() + "/" + gameCard.getKineticDef());
+			energyTextView.setText(gameCard.getEnergyAtt() + "/" + gameCard.getEnergyDef());
+			missleTextView.setText(gameCard.getMissleAtt() + "/" + gameCard.getMissleDef());
+		} catch(ClassCastException e) {
+			//TODO add logger
+			e.printStackTrace();
+		}
+		
 
 		return shipView;
 	}

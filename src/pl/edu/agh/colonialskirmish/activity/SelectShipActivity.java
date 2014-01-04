@@ -7,22 +7,48 @@ import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.adapter.ShipArrayAdapter;
 import pl.edu.agh.colonialskirmish.game.Card;
 import pl.edu.agh.colonialskirmish.test.util.CardMockUtil;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 
-public class SelectShipActivity extends Activity {
+public class SelectShipActivity extends Fragment {
 
+	public static final String PARAM_SHIPS_TO_SHOW_KEY = "key.selectShipActivity.ships.to.show";
+	
+//	@Override
+//	public void onCreate( Bundle savedInstanceState ) {
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activity_select_ship);
+//
+//		GridView gridView = (GridView) findViewById(R.id.shipGridview);
+//		Map<Card, List<Card>> cardMap = CardMockUtil.getShipCards();
+//		ShipArrayAdapter shipArrayAdapter = new ShipArrayAdapter(
+//				getApplicationContext(), cardMap);
+//		gridView.setAdapter(shipArrayAdapter);
+//	}
+	
 	@Override
-	protected void onCreate( Bundle savedInstanceState ) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_select_ship);
-
-		GridView gridView = (GridView) findViewById(R.id.shipGridview);
-		Map<Card, List<Card>> cardMap = CardMockUtil.getShipCards();
+	public View onCreateView( LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState ) {
+		View rootView = inflater.inflate(R.layout.activity_select_ship, container, false);
+		
+		int shipTypeToShow = getArguments().getInt(PARAM_SHIPS_TO_SHOW_KEY);
+		
+		GridView gridView = (GridView) rootView.findViewById(R.id.shipGridview);
+		Map<Card, List<Card>> cardMap;
+		if(shipTypeToShow == 0) {
+			cardMap = CardMockUtil.getShipCards();
+		} else {
+			cardMap = CardMockUtil.getShipCards2();
+		}
 		ShipArrayAdapter shipArrayAdapter = new ShipArrayAdapter(
-				getApplicationContext(), cardMap);
+				getActivity(), cardMap);
 		gridView.setAdapter(shipArrayAdapter);
+		
+		return rootView;
 	}
 
 }

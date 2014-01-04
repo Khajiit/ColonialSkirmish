@@ -51,11 +51,14 @@ public class GameActivity extends Activity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.action_show_hand:
+			showCard();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	public void showCard( View view ) {
+	
+	public void showCard() {
 		Intent intent = new Intent(this, SelectCardActivity.class);
 		startActivity(intent);
 	}
@@ -66,7 +69,7 @@ public class GameActivity extends Activity {
 	}
 
 	public void showShips( View view ) {
-		Intent intent = new Intent(this, SelectShipActivity.class);
+		Intent intent = new Intent(this, ShowSpaceAreaActivity.class);
 		startActivity(intent);
 	}
 

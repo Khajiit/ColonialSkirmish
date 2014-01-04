@@ -18,7 +18,7 @@
 	    >
 	
 	    <TextView
-	        android:id="@+id/textView1"
+	        android:id="@+id/cardTitleLabel"
 	        android:layout_width="wrap_content"
 	        android:layout_height="27dp"
 	        android:layout_column="0"
@@ -34,7 +34,7 @@
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	    <TextView
-	        android:id="@+id/textView2"
+	        android:id="@+id/cardCostLabel"
 	        android:layout_width="68dp"
 	        android:layout_height="91dp"
 	        android:layout_column="0"
@@ -51,7 +51,7 @@
 	        android:gravity="right"/>
 
 	    <TextView
-	        android:id="@+id/textView4"
+	        android:id="@+id/cardTypeLabel"
 	        android:layout_height="39dp"
 	        android:layout_column="0"
 	        android:layout_gravity="center_horizontal|bottom"
@@ -74,7 +74,7 @@
 	    android:layout_marginLeft="5dp" >
 
 		<TextView
-	        android:id="@+id/textView3"
+	        android:id="@+id/cardDescriptionText"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
 	        android:text="Przykładowy opis akcji, która może zostać wykonana. To pole zostanie zastąpione przez button"
