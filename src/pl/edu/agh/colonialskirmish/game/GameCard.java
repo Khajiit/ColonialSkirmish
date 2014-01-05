@@ -1,5 +1,8 @@
 package pl.edu.agh.colonialskirmish.game;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 public class GameCard implements Card {
 
 	/* Title of the card */
@@ -37,6 +40,9 @@ public class GameCard implements Card {
 	
 	/* Card description */
 	protected String description;
+	
+	/* Image of this card */
+	protected Drawable image;
 
 	@Override
 	public void getInitAction() {
@@ -276,6 +282,14 @@ public class GameCard implements Card {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Drawable getImage() {
+		return image;
+	}
+
+	public void setImage(Drawable image) {
+		this.image = image;
 	}
 
 }
