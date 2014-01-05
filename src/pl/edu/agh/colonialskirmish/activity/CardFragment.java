@@ -5,10 +5,14 @@ import pl.edu.agh.colonialskirmish.game.Card;
 import pl.edu.agh.colonialskirmish.game.CardType;
 import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.support.v4.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 public class CardFragment extends Fragment {
@@ -24,11 +28,14 @@ public class CardFragment extends Fragment {
 		TextView cardCost = (TextView) rootView.findViewById(R.id.cardCostLabel);
 		TextView cardDescription = (TextView) rootView.findViewById(R.id.cardDescriptionText);
 		TextView cardType = (TextView) rootView.findViewById(R.id.cardTypeLabel);
+		GridLayout gridLayout = (GridLayout) rootView.findViewById(R.id.cardBackgroundGridLayout);
 		
 		cardTitle.setText(card.getName());
 		cardCost.setText(String.valueOf(card.getCost()));
 		cardDescription.setText(card.getDescription());
 		cardType.setText( getTypeString(card) );
+		
+		gridLayout.setBackground(card.getImage());
 		
 		return rootView;
 	}
