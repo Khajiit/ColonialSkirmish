@@ -1,6 +1,5 @@
 package pl.edu.agh.colonialskirmish.game;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 public class GameCard implements Card {
@@ -37,12 +36,13 @@ public class GameCard implements Card {
 
 	/* Specifiec if the card was used this turn */
 	protected boolean isActivated;
-	
+
 	/* Card description */
 	protected String description;
-	
+
 	/* Image of this card */
 	protected Drawable image;
+	protected String imagePath = "spaceship.jpg";
 
 	@Override
 	public void getInitAction() {
@@ -280,7 +280,7 @@ public class GameCard implements Card {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription( String description ) {
 		this.description = description;
 	}
 
@@ -288,8 +288,16 @@ public class GameCard implements Card {
 		return image;
 	}
 
-	public void setImage(Drawable image) {
+	public void setImage( Drawable image ) {
 		this.image = image;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath( String imagePath ) {
+		this.imagePath = imagePath;
 	}
 
 }
