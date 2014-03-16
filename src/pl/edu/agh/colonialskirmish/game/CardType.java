@@ -1,6 +1,8 @@
 package pl.edu.agh.colonialskirmish.game;
 
 public enum CardType {
+	NONE,
+
 	/* Main categories */
 	SHIP, GROUND_UNIT, PLANET, ACTION, UPGRADE,
 

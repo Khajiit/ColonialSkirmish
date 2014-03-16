@@ -1,8 +1,11 @@
 package pl.edu.agh.colonialskirmish.game;
 
-import android.graphics.drawable.Drawable;
+import java.io.Serializable;
 
-public class GameCard implements Card {
+public class GameCard implements Card, Serializable {
+
+	protected int id;
+	protected int version = 0;
 
 	/* Title of the card */
 	protected String name;
@@ -41,7 +44,6 @@ public class GameCard implements Card {
 	protected String description;
 
 	/* Image of this card */
-	protected Drawable image;
 	protected String imagePath = "spaceship.jpg";
 
 	@Override
@@ -284,20 +286,42 @@ public class GameCard implements Card {
 		this.description = description;
 	}
 
-	public Drawable getImage() {
-		return image;
-	}
-
-	public void setImage( Drawable image ) {
-		this.image = image;
-	}
-
 	public String getImagePath() {
 		return imagePath;
 	}
 
 	public void setImagePath( String imagePath ) {
 		this.imagePath = imagePath;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId( int id ) {
+		this.id = id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion( int version ) {
+		this.version = version;
+	}
+
+	@Override
+	public String toString() {
+		return "GameCard [id=" + id + ", version=" + version + ", name=" + name + ", mainType="
+				+ mainType + ", secondaryType=" + secondaryType + ", cost=" + cost
+				+ ", basicHealth=" + basicHealth + ", health=" + health + ", basicKineticAtt="
+				+ basicKineticAtt + ", basicKineticDef=" + basicKineticDef + ", basicEnergyAtt="
+				+ basicEnergyAtt + ", basicEnergyDef=" + basicEnergyDef + ", basicMissleAtt="
+				+ basicMissleAtt + ", basicMissleDef=" + basicMissleDef + ", kineticAtt="
+				+ kineticAtt + ", kineticDef=" + kineticDef + ", energyAtt=" + energyAtt
+				+ ", energyDef=" + energyDef + ", missleAtt=" + missleAtt + ", missleDef="
+				+ missleDef + ", isActivated=" + isActivated + ", description=" + description
+				+ ", imagePath=" + imagePath + "]";
 	}
 
 }

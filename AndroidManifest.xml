@@ -48,6 +48,10 @@
             android:name="pl.edu.agh.colonialskirmish.activity.ShowSpaceAreaActivity"
             android:label="@string/title_activity_show_space_area" >
         </activity>
+        <activity
+            android:name="pl.edu.agh.colonialskirmish.activity.LoadCardsActivity"
+            android:label="@string/title_activity_load_cards" >
+        </activity>
     </application>
 
 </manifest>

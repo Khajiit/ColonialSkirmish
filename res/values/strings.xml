@@ -13,5 +13,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_select_ship">SelectShipActivity</string>
     <string name="title_activity_show_space_area">ShowSpaceAreaActivity</string>
+    <string name="title_activity_load_cards">LoadCardsActivity</string>
+    <string name="load_card">Wczytaj karty</string>
 
 </resources>

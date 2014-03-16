@@ -4,8 +4,8 @@ import java.util.List;
 
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.adapter.CardPagerAdapter;
+import pl.edu.agh.colonialskirmish.db.DatabaseContext;
 import pl.edu.agh.colonialskirmish.game.GameCard;
-import pl.edu.agh.colonialskirmish.test.util.CardMockUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
@@ -49,7 +49,8 @@ public class SelectCardActivity extends FragmentActivity {
 		// }
 
 		viewPager = (ViewPager) findViewById(R.id.cardPager);
-		List<GameCard> cards = CardMockUtil.getPlayerCards();
+		DatabaseContext dbContext = new DatabaseContext(this);
+		List<GameCard> cards = dbContext.loadCards();
 		pagerAdapter = new CardPagerAdapter(getSupportFragmentManager(), cards);
 		viewPager.setAdapter(pagerAdapter);
 	}

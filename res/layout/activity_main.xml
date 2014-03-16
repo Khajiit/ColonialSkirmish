@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,19 +7,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@drawable/planets_bg" >
+    android:background="@drawable/planets_bg"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/menu_new_game"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
         android:text="@string/new_game" 
         android:textAlignment="center"
         android:textColor="#00CCCC"
         android:textStyle="bold"
         android:onClick="newGame"/>
+    
+    <Button
+        android:id="@+id/menu_load_cards"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/load_card" 
+        android:textAlignment="center"
+        android:textColor="#00CCCC"
+        android:textStyle="bold"
+        android:onClick="addCards"/>
 
-</RelativeLayout>
+</LinearLayout>

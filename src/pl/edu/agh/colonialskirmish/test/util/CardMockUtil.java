@@ -14,7 +14,7 @@ import pl.edu.agh.colonialskirmish.game.GameCard;
 public class CardMockUtil {
 
 	static Random random = new Random();
-	
+
 	public static Map<Card, List<Card>> getPlanetCards() {
 		Map<Card, List<Card>> planetCards = new HashMap<Card, List<Card>>();
 		Card card1 = mockPlanetCard("Earth");
@@ -30,6 +30,7 @@ public class CardMockUtil {
 		GameCard card = new GameCard();
 		card.setName(name);
 		card.setMainType(CardType.PLANET);
+		card.setSecondaryType(CardType.NONE);
 
 		return card;
 	}
@@ -38,15 +39,15 @@ public class CardMockUtil {
 		GameCard card = new GameCard();
 		card.setName(name);
 		card.setMainType(CardType.SHIP);
+		card.setSecondaryType(CardType.SHIP_BATTLE_SHIP);
 		card.setKineticAtt(random.nextInt(8));
 		card.setKineticDef(random.nextInt(8));
-		
+
 		card.setEnergyAtt(random.nextInt(8));
 		card.setEnergyDef(random.nextInt(8));
-		
+
 		card.setMissleAtt(random.nextInt(8));
 		card.setMissleDef(random.nextInt(8));
-		
 
 		return card;
 	}
@@ -61,7 +62,7 @@ public class CardMockUtil {
 
 		return shipCards;
 	}
-	
+
 	public static Map<Card, List<Card>> getShipCards2() {
 		Map<Card, List<Card>> shipCards = new HashMap<Card, List<Card>>();
 		Card card1 = mockShipCard("Enterprise");
@@ -74,20 +75,24 @@ public class CardMockUtil {
 
 		return shipCards;
 	}
-	
+
 	public static List<GameCard> getPlayerCards() {
 		List<GameCard> cards = new ArrayList<GameCard>();
-		
-		Card card1 = mockShipCard("Enterprise");
-		Card card2 = mockShipCard("Voyager");
-		Card card3 = mockShipCard("Millenium Falcon");
-		Card card4 = mockPlanetCard("Earth");
-		
+
+		GameCard card1 = (GameCard) mockShipCard("Enterprise");
+		card1.setId(1);
+		GameCard card2 = (GameCard) mockShipCard("Voyager");
+		card2.setId(2);
+		GameCard card3 = (GameCard) mockShipCard("Millenium Falcon");
+		card3.setId(3);
+		GameCard card4 = (GameCard) mockPlanetCard("Earth");
+		card4.setId(4);
+
 		cards.add((GameCard) card1);
 		cards.add((GameCard) card2);
 		cards.add((GameCard) card3);
 		cards.add((GameCard) card4);
-		
+
 		return cards;
 	}
 }
