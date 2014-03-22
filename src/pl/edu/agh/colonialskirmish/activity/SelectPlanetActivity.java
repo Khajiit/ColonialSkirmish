@@ -5,10 +5,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.adapter.PlanetArrayAdapter;
 import pl.edu.agh.colonialskirmish.game.Card;
 import pl.edu.agh.colonialskirmish.test.util.CardMockUtil;
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +41,33 @@ public class SelectPlanetActivity extends ListActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.select_planet, menu);
 		return true;
+	}
+
+	@Override
+	protected void onDestroy() {
+		clearReferences();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		clearReferences();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		GameApplication app = (GameApplication) getApplication();
+		app.setCurrentActivity(this);
+	}
+
+	protected void clearReferences() {
+		GameApplication app = (GameApplication) getApplication();
+		Activity activity = app.getCurrentActivity();
+		if ( this.equals(activity) ) {
+			app.setCurrentActivity(null);
+		}
 	}
 
 }

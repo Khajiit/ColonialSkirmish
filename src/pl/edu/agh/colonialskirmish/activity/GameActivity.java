@@ -1,8 +1,8 @@
 package pl.edu.agh.colonialskirmish.activity;
 
+import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class GameActivity extends Activity {
+public class GameActivity extends BaseGameActivity {
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -19,6 +19,9 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		// Send initial messages
+		GameApplication app = (GameApplication) getApplication();
+		app.getNetworkController().connect();
 	}
 
 	/**
@@ -57,7 +60,7 @@ public class GameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void showCard() {
 		Intent intent = new Intent(this, SelectCardActivity.class);
 		startActivity(intent);

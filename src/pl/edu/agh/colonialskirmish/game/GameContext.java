@@ -52,4 +52,8 @@ public class GameContext {
 		this.turnQueue = turnQueue;
 	}
 
+	public void onTerminate() {
+
+	}
+
 }

@@ -2,10 +2,12 @@ package pl.edu.agh.colonialskirmish.activity;
 
 import java.util.List;
 
+import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.adapter.CardPagerAdapter;
 import pl.edu.agh.colonialskirmish.db.DatabaseContext;
 import pl.edu.agh.colonialskirmish.game.GameCard;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
@@ -53,5 +55,32 @@ public class SelectCardActivity extends FragmentActivity {
 		List<GameCard> cards = dbContext.loadCards();
 		pagerAdapter = new CardPagerAdapter(getSupportFragmentManager(), cards);
 		viewPager.setAdapter(pagerAdapter);
+	}
+
+	@Override
+	protected void onDestroy() {
+		clearReferences();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		clearReferences();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		GameApplication app = (GameApplication) getApplication();
+		app.setCurrentActivity(this);
+	}
+
+	protected void clearReferences() {
+		GameApplication app = (GameApplication) getApplication();
+		Activity activity = app.getCurrentActivity();
+		if ( this.equals(activity) ) {
+			app.setCurrentActivity(null);
+		}
 	}
 }
