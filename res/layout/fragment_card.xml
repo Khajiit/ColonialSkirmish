@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:background="#000"
-	    android:orientation="vertical">
+    android:layout_height="fill_parent"
+    android:background="#000"
+    android:onClick="showActionDialog"
+    android:orientation="vertical" >
 
 	<GridLayout 
 	    android:id="@+id/cardBackgroundGridLayout"
@@ -72,20 +73,23 @@
 	    android:orientation="vertical"
 	    android:background="@drawable/card_description_bg"
 	    android:layout_marginRight="5dp"
-	    android:layout_marginLeft="5dp" >
+	    android:layout_marginLeft="5dp"
+	    android:id="@+id/cardActionsLinearLayout" >
 
 		<TextView
 	        android:id="@+id/cardDescriptionText"
 	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
+	        android:layout_height="wrap_content"
 	        android:text="Przykładowy opis akcji, która może zostać wykonana. To pole zostanie zastąpione przez button"
 	        android:textColor="#000"
 	        android:padding="10dp" />
-	
-		<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" >
-		</LinearLayout>
+				
+<!-- 		<LinearLayout -->
+<!-- 		    android:layout_width="match_parent" -->
+<!-- 		    android:layout_height="wrap_content" > -->
+<!-- 		</LinearLayout> -->
+		
+		
 
 	</LinearLayout>
 	

@@ -52,6 +52,7 @@
             android:name="pl.edu.agh.colonialskirmish.activity.LoadCardsActivity"
             android:label="@string/title_activity_load_cards" >
         </activity>
+        <service android:name=".network.NetworkService"></service>
     </application>
 
 </manifest>

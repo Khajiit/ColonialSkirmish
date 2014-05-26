@@ -51,6 +51,7 @@ public class LoadCardsActivity extends Activity {
 		Log.i("LoadCardsActivity", "Loading cards...");
 		List<GameCard> cards = (List<GameCard>) intent.getSerializableExtra(EXTRA_CARDS);
 		DatabaseContext dbContext = new DatabaseContext(this);
+		dbContext.dropTable();
 		int progressUpdateValue = 100 / cards.size();
 		for ( GameCard card : cards ) {
 			Log.i("LoadCardsActivity", "Loading card " + card);

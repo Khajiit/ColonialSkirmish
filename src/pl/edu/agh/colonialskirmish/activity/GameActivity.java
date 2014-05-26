@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class GameActivity extends BaseGameActivity {
 
@@ -19,9 +21,21 @@ public class GameActivity extends BaseGameActivity {
 		setContentView(R.layout.activity_game);
 		// Show the Up button in the action bar.
 		setupActionBar();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
 		// Send initial messages
 		GameApplication app = (GameApplication) getApplication();
 		app.getNetworkController().connect();
+	}
+
+	@Override
+	protected void onStop() {
+		GameApplication app = (GameApplication) getApplication();
+		app.getNetworkController().disconnect();
+		super.onStop();
 	}
 
 	/**
@@ -61,9 +75,22 @@ public class GameActivity extends BaseGameActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onActivityResult( int requestCode, int resultCode, Intent data ) {
+		if ( requestCode == SelectCardActivity.SELECT_CARD_REQUEST ) {
+			Log.d("onActivityResult", "Received select card activity result with code "
+					+ requestCode);
+			if ( resultCode == RESULT_OK ) {
+				int cardIndex = data.getIntExtra(SelectCardActivity.EXTRA_CARD_INDEX, -1);
+				Toast.makeText(this, "Result received, selected card is " + cardIndex,
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
 	public void showCard() {
 		Intent intent = new Intent(this, SelectCardActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, SelectCardActivity.SELECT_CARD_REQUEST);
 	}
 
 	public void showPlanets( View view ) {

@@ -3,6 +3,7 @@ package pl.edu.agh.colonialskirmish.db;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.edu.agh.colonialskirmish.game.CardAction;
 import pl.edu.agh.colonialskirmish.game.CardType;
 import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.content.ContentValues;
@@ -90,7 +91,43 @@ public class DatabaseContext {
 		intValue = cursor.getInt(cursor.getColumnIndex(dbHelper.COLUMN_VERSION));
 		card.setVersion(intValue);
 
+		String cardActions = cursor.getString(cursor
+				.getColumnIndex(dbHelper.COLUMN_CARD_ACTION_LIST));
+		String cardActionsDsc = cursor.getString(cursor
+				.getColumnIndex(dbHelper.COLUMN_CARD_ACTION_DESC_LIST));
+		card.setCardActionList(loadCardActionList(cardActions, cardActionsDsc));
+
 		return card;
+	}
+
+	/**
+	 * Create list of card actions from two strings
+	 * 
+	 * @param cardActions
+	 *            card actions separated by dbHelper.ACTION_SEPARATOR
+	 * @param cardActionsDsc
+	 *            card action descriptions separated by
+	 *            dbHelper.ACTION_SEPARATOR
+	 * @return
+	 */
+	private List<CardAction> loadCardActionList( String cardActions, String cardActionsDsc ) {
+		List<CardAction> cardActionList = new ArrayList<CardAction>();
+
+		if ( cardActions != null && cardActionsDsc != null ) {
+			String[] actionNames = cardActions.split(dbHelper.ACTION_SEPARATOR);
+			String[] actionDsc = cardActionsDsc.split(dbHelper.ACTION_SEPARATOR);
+
+			if ( actionNames.length != actionDsc.length ) {
+				Log.e("loadCardActionList", "Number of actions " + actionNames.length
+						+ " is different than number of descriptions! " + actionDsc.length);
+			}
+
+			for ( int i = 0; i < actionNames.length; i++ ) {
+				cardActionList.add(new CardAction(actionNames[i], actionDsc[i]));
+			}
+		}
+
+		return cardActionList;
 	}
 
 	public void addCard( GameCard card ) {
@@ -112,13 +149,36 @@ public class DatabaseContext {
 		values.put(dbHelper.COLUMN_CARD_MISSLE_DEF, card.getMissleDef());
 		values.put(dbHelper.COLUMN_CARD_NAME, card.getName());
 		values.put(dbHelper.COLUMN_VERSION, card.getVersion());
+		serializeCardActions(values, card);
 
 		db.insert(dbHelper.DECK_TABLE_NAME, null, values);
 		db.close();
 	}
 
+	private void serializeCardActions( ContentValues values, GameCard card ) {
+		List<CardAction> cardActions = card.getCardActionList();
+		StringBuilder actionNames = new StringBuilder();
+		StringBuilder actionDescriptions = new StringBuilder();
+		boolean firstActionAdded = false;
+
+		for ( CardAction action : cardActions ) {
+			if ( firstActionAdded ) {
+				actionNames.append(dbHelper.ACTION_SEPARATOR);
+				actionDescriptions.append(dbHelper.ACTION_SEPARATOR);
+			}
+			actionNames.append(action.getActionName());
+			actionDescriptions.append(action.getActionDescription());
+		}
+
+		values.put(dbHelper.COLUMN_CARD_ACTION_LIST, actionNames.toString());
+		values.put(dbHelper.COLUMN_CARD_ACTION_DESC_LIST, actionDescriptions.toString());
+	}
+
 	public void dropTable() {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		db.delete(dbHelper.DECK_TABLE_NAME, null, null);
+		// db.delete(dbHelper.DECK_TABLE_NAME, null, null);
+		// db.execSQL("DROP TABLE " + dbHelper.DECK_TABLE_NAME);
+		dbHelper.onCreate(db);
 	}
+
 }

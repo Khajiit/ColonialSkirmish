@@ -1,6 +1,8 @@
 package pl.edu.agh.colonialskirmish.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameCard implements Card, Serializable {
 
@@ -46,82 +48,84 @@ public class GameCard implements Card, Serializable {
 	/* Image of this card */
 	protected String imagePath = "spaceship.jpg";
 
-	@Override
-	public void getInitAction() {
-		// TODO Auto-generated method stub
+	protected List<CardAction> cardActionList = new ArrayList<CardAction>();
 
+	@Override
+	public String getInitAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void getOnPlayAction() {
+	public String getOnPlayAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnActivateAction() {
+	public String getOnActivateAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnDiscardAction() {
+	public String getOnDiscardAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnRemoveAction() {
+	public String getOnRemoveAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnPlayerDrawsCardsAction() {
+	public String getOnPlayerDrawsCardsAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnEnemyDrawsCardsAction() {
+	public String getOnEnemyDrawsCardsAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnReceiveDamageAction() {
+	public String getOnReceiveDamageAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnNewTurnAction() {
+	public String getOnNewTurnAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnCardDiscardedAction() {
+	public String getOnCardDiscardedAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnCardRemovedAction() {
+	public String getOnCardRemovedAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnEnemyUnitDestroyedAction() {
+	public String getOnEnemyUnitDestroyedAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getOnFriendlyUnitDestroyedAction() {
+	public String getOnFriendlyUnitDestroyedAction() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	/***** Getters and setters *****/
@@ -308,6 +312,14 @@ public class GameCard implements Card, Serializable {
 
 	public void setVersion( int version ) {
 		this.version = version;
+	}
+
+	public List<CardAction> getCardActionList() {
+		return cardActionList;
+	}
+
+	public void setCardActionList( List<CardAction> cardActionList ) {
+		this.cardActionList = cardActionList;
 	}
 
 	@Override

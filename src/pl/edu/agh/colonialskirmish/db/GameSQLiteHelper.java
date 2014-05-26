@@ -42,11 +42,17 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
 
 	public static final String COLUMN_CARD_IMAGE_PATH = "imagePath";
 
+	public static final String COLUMN_CARD_ACTION_LIST = "actionList";
+
+	public static final String COLUMN_CARD_ACTION_DESC_LIST = "actionDescriptionList";
+
 	public static final String TEXT_TYPE = " TEXT";
 
 	public static final String BLOB_TYPE = " BLOB";
 
 	public static final String INT_TYPE = " INTEGER";
+
+	public static final String ACTION_SEPARATOR = "[%ACTION%]";
 
 	private static final String QUERY_CREATE_DECK_TABLE = "CREATE TABLE " + DECK_TABLE_NAME + " ("
 			+ COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_CARD_NAME + TEXT_TYPE + ","
@@ -56,7 +62,8 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
 			+ COLUMN_CARD_MISSLE_ATT + INT_TYPE + "," + COLUMN_CARD_MISSLE_DEF + INT_TYPE + ","
 			+ COLUMN_CARD_HEALTH + INT_TYPE + "," + COLUMN_CARD_MAIN_TYPE + TEXT_TYPE + ","
 			+ COLUMN_CARD_SECONDARY_TYPE + TEXT_TYPE + "," + COLUMN_CARD_IMAGE_PATH + TEXT_TYPE
-			+ "," + COLUMN_VERSION + INT_TYPE + ")";
+			+ "," + COLUMN_VERSION + INT_TYPE + "," + COLUMN_CARD_ACTION_LIST + TEXT_TYPE + ","
+			+ COLUMN_CARD_ACTION_DESC_LIST + TEXT_TYPE + ")";
 
 	private static final String QUERY_DROP_DECK_TABLE = "DROP TABLE IF EXISTS " + DECK_TABLE_NAME;
 

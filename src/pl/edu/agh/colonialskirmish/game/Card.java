@@ -16,52 +16,52 @@ public interface Card {
 	/**
 	 * Called when the card is drawn from the deck
 	 */
-	public void getInitAction();
+	public String getInitAction();
 
 	/**
 	 * Called when the card is being played
 	 */
-	public void getOnPlayAction();
+	public String getOnPlayAction();
 
 	/**
 	 * Called when the card is activated
 	 */
-	public void getOnActivateAction();
+	public String getOnActivateAction();
 
 	/**
 	 * Called when the card is being discarded from player's hand
 	 */
-	public void getOnDiscardAction();
+	public String getOnDiscardAction();
 
 	/**
 	 * Called when card is played and is being removed from game
 	 */
-	public void getOnRemoveAction();
+	public String getOnRemoveAction();
 
 	/*********************************************************************************************/
 	/************* Additional listeners - called when card registers itself for them *************/
 	/*********************************************************************************************/
 
-	public void getOnPlayerDrawsCardsAction();
+	public String getOnPlayerDrawsCardsAction();
 
-	public void getOnEnemyDrawsCardsAction();
+	public String getOnEnemyDrawsCardsAction();
 
-	public void getOnReceiveDamageAction();
+	public String getOnReceiveDamageAction();
 
-	public void getOnNewTurnAction();
+	public String getOnNewTurnAction();
 
 	/**
 	 * Called when player discards some cards
 	 */
-	public void getOnCardDiscardedAction();
+	public String getOnCardDiscardedAction();
 
 	/**
 	 * Called when some cards are being removed from game area
 	 */
-	public void getOnCardRemovedAction();
+	public String getOnCardRemovedAction();
 
-	public void getOnEnemyUnitDestroyedAction();
+	public String getOnEnemyUnitDestroyedAction();
 
-	public void getOnFriendlyUnitDestroyedAction();
+	public String getOnFriendlyUnitDestroyedAction();
 
 }

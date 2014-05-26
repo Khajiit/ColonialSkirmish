@@ -8,16 +8,27 @@ import pl.edu.agh.colonialskirmish.adapter.CardPagerAdapter;
 import pl.edu.agh.colonialskirmish.db.DatabaseContext;
 import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Toast;
 
 public class SelectCardActivity extends FragmentActivity {
+
+	public static final int SELECT_CARD_REQUEST = 0;
+
+	public static final String EXTRA_CARD_INDEX = "cardIndexKey";
+
+	public static final String EXTRA_EXECUTED_ACTION = "cardExecutedActionKey";
 
 	private ViewPager viewPager;
 
 	private PagerAdapter pagerAdapter;
+
+	private List<GameCard> cards;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -25,34 +36,10 @@ public class SelectCardActivity extends FragmentActivity {
 		getActionBar().hide();
 		setContentView(R.layout.activity_select_card);
 
-		// Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-		// R.drawable.spaceship);
-		// String filePath = getExternalFilesDir(null).getAbsolutePath();
-		//
-		// File file = new File(filePath, "spaceship.jpg");
-		// if ( !file.exists() ) {
-		// FileOutputStream fileOutputStream = null;
-		// try {
-		// fileOutputStream = new FileOutputStream(file);
-		// bitmap.compress(Bitmap.CompressFormat.JPEG, 100,
-		// fileOutputStream);
-		// fileOutputStream.flush();
-		// } catch ( Exception e ) {
-		// e.printStackTrace();
-		// } finally {
-		// try {
-		// if ( fileOutputStream != null ) {
-		// fileOutputStream.close();
-		// }
-		// } catch ( IOException e ) {
-		// e.printStackTrace();
-		// }
-		// }
-		// }
-
 		viewPager = (ViewPager) findViewById(R.id.cardPager);
 		DatabaseContext dbContext = new DatabaseContext(this);
-		List<GameCard> cards = dbContext.loadCards();
+		cards = dbContext.loadCards(); // TODO: load this from
+										// game context
 		pagerAdapter = new CardPagerAdapter(getSupportFragmentManager(), cards);
 		viewPager.setAdapter(pagerAdapter);
 	}
@@ -82,5 +69,19 @@ public class SelectCardActivity extends FragmentActivity {
 		if ( this.equals(activity) ) {
 			app.setCurrentActivity(null);
 		}
+	}
+
+	public void cardSelected( View view ) {
+		Intent intent = new Intent();
+		int index = viewPager.getCurrentItem();
+		intent.putExtra(EXTRA_CARD_INDEX, index);
+		setResult(RESULT_OK, intent);
+		finish();
+	}
+
+	public void showActionDialog( View view ) {
+		int currentCardIndex = viewPager.getCurrentItem();
+		GameCard currentCard = cards.get(currentCardIndex);
+		Toast.makeText(this, "Clicked! " + viewPager.getCurrentItem(), Toast.LENGTH_SHORT).show();
 	}
 }
