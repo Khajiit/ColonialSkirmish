@@ -2,6 +2,7 @@ package pl.edu.agh.colonialskirmish.game;
 
 import pl.edu.agh.colonialskirmish.network.NetworkController;
 import pl.edu.agh.colonialskirmish.rhino.RhinoContext;
+import pl.edu.agh.colonialskirmish.util.GameLog;
 import android.content.Context;
 
 public class BasicGameController implements GameController {
@@ -14,8 +15,11 @@ public class BasicGameController implements GameController {
 
 	protected NetworkController networkController;
 
-	public BasicGameController( Context context ) {
+	protected GameLog gameLog;
+
+	public BasicGameController( Context context, GameLog gameLog ) {
 		this.context = context;
+		this.gameLog = gameLog;
 	}
 
 }

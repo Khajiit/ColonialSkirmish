@@ -2,8 +2,12 @@ package pl.edu.agh.colonialskirmish;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import pl.edu.agh.colonialskirmish.game.BasicGameController;
 import pl.edu.agh.colonialskirmish.game.GameContext;
+import pl.edu.agh.colonialskirmish.game.GameController;
 import pl.edu.agh.colonialskirmish.network.NetworkController;
 import pl.edu.agh.colonialskirmish.rhino.RhinoContext;
 import pl.edu.agh.colonialskirmish.util.GameLog;
@@ -12,7 +16,7 @@ import android.app.Application;
 
 public class GameApplication extends Application {
 
-	protected RhinoContext rhinoContext = new RhinoContext();
+	protected RhinoContext rhinoContext;
 
 	protected GameContext gameContext = new GameContext();
 
@@ -22,9 +26,22 @@ public class GameApplication extends Application {
 
 	protected Activity currentActivity;
 
+	protected GameController gameController;
+
 	public GameApplication() {
 		super();
+		// Network controller
 		networkController = new NetworkController(this, gameLog);
+
+		// GameController
+		gameController = new BasicGameController(this, gameLog);
+
+		// Rhino context for js execution
+		rhinoContext = new RhinoContext();
+		Map<String, Object> variablesMap = new HashMap<String, Object>();
+		variablesMap.put("gameController", gameController);
+		variablesMap.put("gameLog", gameLog);
+		rhinoContext.setVariablesMap(variablesMap);
 	}
 
 	public RhinoContext getRhinoContext() {
