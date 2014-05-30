@@ -2,6 +2,7 @@ package pl.edu.agh.colonialskirmish.network;
 
 import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.network.NetworkService.NetworkServiceBinder;
+import pl.edu.agh.colonialskirmish.util.GameLog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +11,13 @@ import android.os.IBinder;
 
 public class NetworkController {
 
-	GameApplication gameApplication;
+	private GameApplication gameApplication;
 
-	NetworkService networkService;
+	private NetworkService networkService;
 
-	boolean boundToService = false;
+	private boolean boundToService = false;
+
+	private GameLog gameLog;
 
 	ServiceConnection serviceConnection = new ServiceConnection() {
 
@@ -32,16 +35,17 @@ public class NetworkController {
 		}
 	};
 
-	public NetworkController( GameApplication gameApplication ) {
+	public NetworkController( GameApplication gameApplication, GameLog gameLog ) {
 		super();
 		this.gameApplication = gameApplication;
+		this.gameLog = gameLog;
 	}
 
 	public void connect() {
 		Context context = gameApplication.getApplicationContext();
 		Intent intent = new Intent(context, NetworkService.class);
 		context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-		gameApplication.appendGameLog("Connecting...");
+		gameLog.append("Connecting...");
 	}
 
 	public void disconnect() {

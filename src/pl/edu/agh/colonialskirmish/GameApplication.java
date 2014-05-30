@@ -6,9 +6,9 @@ import java.util.Date;
 import pl.edu.agh.colonialskirmish.game.GameContext;
 import pl.edu.agh.colonialskirmish.network.NetworkController;
 import pl.edu.agh.colonialskirmish.rhino.RhinoContext;
+import pl.edu.agh.colonialskirmish.util.GameLog;
 import android.app.Activity;
 import android.app.Application;
-import android.widget.TextView;
 
 public class GameApplication extends Application {
 
@@ -16,11 +16,16 @@ public class GameApplication extends Application {
 
 	protected GameContext gameContext = new GameContext();
 
-	protected NetworkController networkController = new NetworkController(this);
+	protected GameLog gameLog = new GameLog();
 
-	protected StringBuilder gameLog = new StringBuilder();
+	protected NetworkController networkController;
 
 	protected Activity currentActivity;
+
+	public GameApplication() {
+		super();
+		networkController = new NetworkController(this, gameLog);
+	}
 
 	public RhinoContext getRhinoContext() {
 		return rhinoContext;
@@ -54,8 +59,8 @@ public class GameApplication extends Application {
 		this.currentActivity = currentActivity;
 	}
 
-	public String getGameLog() {
-		return gameLog.toString();
+	public GameLog getGameLog() {
+		return gameLog;
 	}
 
 	public void appendGameLog( String newLogMsg ) {
@@ -66,11 +71,6 @@ public class GameApplication extends Application {
 		this.gameLog.append("] ");
 		this.gameLog.append(newLogMsg);
 		this.gameLog.append("\n");
-
-		if ( currentActivity != null ) {
-			TextView gameLogView = (TextView) currentActivity.findViewById(R.id.gameLog);
-			gameLogView.setText(gameLog.toString());
-		}
 	}
 
 	// FIXME: this won't be called on real device!

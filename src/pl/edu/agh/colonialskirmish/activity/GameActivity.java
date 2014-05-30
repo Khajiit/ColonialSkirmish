@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameActivity extends BaseGameActivity {
@@ -36,6 +37,18 @@ public class GameActivity extends BaseGameActivity {
 		GameApplication app = (GameApplication) getApplication();
 		app.getNetworkController().disconnect();
 		super.onStop();
+	}
+
+	@Override
+	protected void onResume() {
+		refreshView();
+		super.onResume();
+	}
+
+	private void refreshView() {
+		TextView gameLogView = (TextView) this.findViewById(R.id.gameLog);
+		GameApplication app = (GameApplication) this.getApplication();
+		gameLogView.setText(app.getGameLog().toString());
 	}
 
 	/**
