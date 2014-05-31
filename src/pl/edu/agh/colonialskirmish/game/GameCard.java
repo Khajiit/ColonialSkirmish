@@ -55,7 +55,7 @@ public class GameCard implements Card, Serializable {
 	protected List<CardAction> cardActionList = new ArrayList<CardAction>();
 
 	protected String initAction;
-	protected String onPlayAction;
+	protected String onPlayAction = "gameLog.append('BOOM!')";
 	protected String onActivateAction;
 	protected String onDiscardAction;
 	protected String onRemoveAction;
@@ -67,6 +67,9 @@ public class GameCard implements Card, Serializable {
 	protected String onCardRemovedAction;
 	protected String onEnemyUnitDestroyedAction;
 	protected String onFriendlyUnitDestroyedAction;
+	protected String onActionUsedAction;
+
+	protected CardLocation cardLocation = CardLocation.HAND;
 
 	public GameCard() {
 		inGameId = GAME_CARD_ID_COUNTER.incrementAndGet();
@@ -135,6 +138,11 @@ public class GameCard implements Card, Serializable {
 	@Override
 	public String getOnFriendlyUnitDestroyedAction() {
 		return onFriendlyUnitDestroyedAction;
+	}
+
+	@Override
+	public String getOnActionUsedAction() {
+		return onActionUsedAction;
 	}
 
 	/***** Getters and setters *****/
@@ -337,6 +345,18 @@ public class GameCard implements Card, Serializable {
 
 	public void setInGameId( int inGameId ) {
 		this.inGameId = inGameId;
+	}
+
+	public CardLocation getCardLocation() {
+		return cardLocation;
+	}
+
+	public void setCardLocation( CardLocation cardLocation ) {
+		this.cardLocation = cardLocation;
+	}
+
+	public void setOnActionUsedAction( String onActionUsedAction ) {
+		this.onActionUsedAction = onActionUsedAction;
 	}
 
 	@Override

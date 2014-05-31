@@ -6,6 +6,7 @@ import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.db.DatabaseContext;
 import pl.edu.agh.colonialskirmish.game.GameCard;
+import pl.edu.agh.colonialskirmish.game.GameContext;
 import pl.edu.agh.colonialskirmish.game.GameController;
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -99,9 +100,10 @@ public class GameActivity extends BaseGameActivity {
 					+ requestCode);
 			if ( resultCode == RESULT_OK ) {
 				int cardInGameId = data.getIntExtra(SelectCardActivity.EXTRA_CARD_ID, -1);
+				String chosenAction = data.getStringExtra(SelectCardActivity.EXTRA_EXECUTED_ACTION);
 				GameApplication app = (GameApplication) getApplication();
 				GameController gameController = app.getGameController();
-				gameController.executeCard(cardInGameId);
+				gameController.executeCard(cardInGameId, chosenAction);
 			}
 		}
 	}
@@ -110,6 +112,13 @@ public class GameActivity extends BaseGameActivity {
 		Intent intent = new Intent(this, SelectCardActivity.class);
 		DatabaseContext dbContext = new DatabaseContext(this);
 		ArrayList<GameCard> cards = (ArrayList<GameCard>) dbContext.loadCards();
+		// FIXME: temporary adding cards to GameCOntext here - this should be
+		// removed in the future
+		GameApplication app = (GameApplication) getApplication();
+		GameContext gameContext = app.getGameController().getGameContext();
+		for ( GameCard card : cards ) {
+			gameContext.getAllCardsCacheMap().put(card.getInGameId(), card);
+		}
 		intent.putExtra(SelectCardActivity.EXTRA_CARDS, cards);
 		startActivityForResult(intent, SelectCardActivity.SELECT_CARD_REQUEST);
 	}

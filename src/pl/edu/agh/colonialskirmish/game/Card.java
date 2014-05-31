@@ -64,4 +64,6 @@ public interface Card {
 
 	public String getOnFriendlyUnitDestroyedAction();
 
+	public String getOnActionUsedAction();
+
 }

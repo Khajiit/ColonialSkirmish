@@ -40,8 +40,8 @@ public class SelectShipActivity extends Fragment {
 
 		GridView gridView = (GridView) rootView.findViewById(R.id.shipGridview);
 		GameApplication app = (GameApplication) getActivity().getApplication();
-		Map<Card, List<Card>> cardMap = app.getGameContext().getPlayers().get(0)
-				.getSpaceAreaCards();
+		Map<Card, List<Card>> cardMap = app.getGameController().getGameContext().getPlayers()
+				.get(0).getSpaceAreaCards();
 		if ( shipTypeToShow == 0 ) {
 			cardMap = CardMockUtil.getShipCards();
 		} else {

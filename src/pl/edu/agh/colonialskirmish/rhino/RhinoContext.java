@@ -7,7 +7,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import pl.edu.agh.colonialskirmish.game.GameContext;
+import android.util.Log;
 
 public class RhinoContext {
 
@@ -23,7 +23,7 @@ public class RhinoContext {
 	 * @param scriptId
 	 *            - script sourceName, useful for debugging
 	 */
-	public void execute( GameContext gameContext, String script, String scriptId ) {
+	public void execute( String script, String scriptId, Map<String, Object> additionalVariablesMap ) {
 		Context cx = Context.enter();
 		cx.setOptimizationLevel(-1);
 
@@ -35,6 +35,7 @@ public class RhinoContext {
 						Context.javaToJS(variableEntry.getValue(), scope));
 			}
 
+			Log.i("RhinoContext", "Evaluating script: " + script);
 			// evaluate script
 			cx.evaluateString(scope, script, scriptId, 1, null);
 		} finally {

@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class CardAction implements Serializable {
 
+	public static final String USE_ACTION = "Card played";
+
 	protected String actionName;
 
 	protected String actionDescription;

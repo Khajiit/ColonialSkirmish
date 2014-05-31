@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pl.edu.agh.colonialskirmish.game.BasicGameController;
-import pl.edu.agh.colonialskirmish.game.GameContext;
 import pl.edu.agh.colonialskirmish.game.GameController;
 import pl.edu.agh.colonialskirmish.network.NetworkController;
 import pl.edu.agh.colonialskirmish.rhino.RhinoContext;
@@ -18,15 +17,13 @@ public class GameApplication extends Application {
 
 	protected RhinoContext rhinoContext;
 
-	protected GameContext gameContext = new GameContext();
-
 	protected GameLog gameLog = new GameLog();
 
 	protected NetworkController networkController;
 
 	protected Activity currentActivity;
 
-	protected GameController gameController;
+	protected BasicGameController gameController;
 
 	public GameApplication() {
 		super();
@@ -42,6 +39,8 @@ public class GameApplication extends Application {
 		variablesMap.put("gameController", gameController);
 		variablesMap.put("gameLog", gameLog);
 		rhinoContext.setVariablesMap(variablesMap);
+
+		gameController.setRhinoContext(rhinoContext);
 	}
 
 	public RhinoContext getRhinoContext() {
@@ -50,14 +49,6 @@ public class GameApplication extends Application {
 
 	public void setRhinoContext( RhinoContext rhinoContext ) {
 		this.rhinoContext = rhinoContext;
-	}
-
-	public GameContext getGameContext() {
-		return gameContext;
-	}
-
-	public void setGameContext( GameContext gameContext ) {
-		this.gameContext = gameContext;
 	}
 
 	public NetworkController getNetworkController() {
@@ -99,7 +90,7 @@ public class GameApplication extends Application {
 	public void onTerminate() {
 		rhinoContext.onTerminate();
 		networkController.onTerminate();
-		gameContext.onTerminate();
+		gameController.getGameContext().onTerminate();
 		super.onTerminate();
 	}
 

@@ -3,6 +3,7 @@ package pl.edu.agh.colonialskirmish.activity;
 import java.io.File;
 
 import pl.edu.agh.colonialskirmish.R;
+import pl.edu.agh.colonialskirmish.game.CardAction;
 import pl.edu.agh.colonialskirmish.game.CardType;
 import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.graphics.Bitmap;
@@ -63,10 +64,26 @@ public class CardFragment extends Fragment {
 
 			@Override
 			public void onClick( View v ) {
-				((SelectCardActivity) getActivity()).cardSelected(v);
+				((SelectCardActivity) getActivity()).cardSelected(v, CardAction.USE_ACTION);
 			}
 		});
 		linearLayout.addView(executeBtn);
+
+		for ( final CardAction cardAction : card.getCardActionList() ) {
+			Button newBtn = new Button(getActivity());
+			newBtn.setText(cardAction.getActionDescription());
+			newBtn.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT));
+			newBtn.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick( View v ) {
+					String actionName = cardAction.getActionName();
+					((SelectCardActivity) getActivity()).cardSelected(v, actionName);
+				}
+			});
+			linearLayout.addView(newBtn);
+		}
 
 		return rootView;
 	}

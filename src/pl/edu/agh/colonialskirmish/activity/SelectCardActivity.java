@@ -74,10 +74,11 @@ public class SelectCardActivity extends FragmentActivity {
 		}
 	}
 
-	public void cardSelected( View view ) {
+	public void cardSelected( View view, String actionName ) {
 		Intent intent = new Intent();
 		int index = viewPager.getCurrentItem();
 		GameCard card = cards.get(index);
+		intent.putExtra(EXTRA_EXECUTED_ACTION, actionName);
 		intent.putExtra(EXTRA_CARD_ID, card.getInGameId());
 		setResult(RESULT_OK, intent);
 		finish();

@@ -1,5 +1,6 @@
 package pl.edu.agh.colonialskirmish.game;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -19,6 +20,12 @@ public class GameContext {
 
 	/* After completing turn active player is added to the end of the queue */
 	protected Queue<PlayerContext> turnQueue;
+
+	protected Map<Integer, GameCard> allCardsCacheMap = new HashMap<Integer, GameCard>();
+
+	public GameCard getCard( Integer inGameId ) {
+		return allCardsCacheMap.get(inGameId);
+	}
 
 	public List<PlayerContext> getPlayers() {
 		return players;
@@ -50,6 +57,14 @@ public class GameContext {
 
 	public void setTurnQueue( Queue<PlayerContext> turnQueue ) {
 		this.turnQueue = turnQueue;
+	}
+
+	public Map<Integer, GameCard> getAllCardsCacheMap() {
+		return allCardsCacheMap;
+	}
+
+	public void setAllCardsCacheMap( Map<Integer, GameCard> allCardsCacheMap ) {
+		this.allCardsCacheMap = allCardsCacheMap;
 	}
 
 	public void onTerminate() {
