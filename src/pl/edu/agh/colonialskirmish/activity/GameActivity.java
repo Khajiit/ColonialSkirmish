@@ -1,7 +1,11 @@
 package pl.edu.agh.colonialskirmish.activity;
 
+import java.util.ArrayList;
+
 import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
+import pl.edu.agh.colonialskirmish.db.DatabaseContext;
+import pl.edu.agh.colonialskirmish.game.GameCard;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -103,6 +107,9 @@ public class GameActivity extends BaseGameActivity {
 
 	public void showCard() {
 		Intent intent = new Intent(this, SelectCardActivity.class);
+		DatabaseContext dbContext = new DatabaseContext(this);
+		ArrayList<GameCard> cards = (ArrayList<GameCard>) dbContext.loadCards();
+		intent.putExtra(SelectCardActivity.EXTRA_CARDS, cards);
 		startActivityForResult(intent, SelectCardActivity.SELECT_CARD_REQUEST);
 	}
 

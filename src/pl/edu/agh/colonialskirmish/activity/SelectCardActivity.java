@@ -24,6 +24,8 @@ public class SelectCardActivity extends FragmentActivity {
 
 	public static final String EXTRA_EXECUTED_ACTION = "cardExecutedActionKey";
 
+	public static final String EXTRA_CARDS = "cards";
+
 	private ViewPager viewPager;
 
 	private PagerAdapter pagerAdapter;
@@ -38,8 +40,9 @@ public class SelectCardActivity extends FragmentActivity {
 
 		viewPager = (ViewPager) findViewById(R.id.cardPager);
 		DatabaseContext dbContext = new DatabaseContext(this);
-		cards = dbContext.loadCards(); // TODO: load this from
-										// game context
+		Intent intent = getIntent();
+		cards = (List<GameCard>) intent.getSerializableExtra(EXTRA_CARDS);
+		// dbContext.loadCards(); // TODO: load this from game context
 		pagerAdapter = new CardPagerAdapter(getSupportFragmentManager(), cards);
 		viewPager.setAdapter(pagerAdapter);
 	}

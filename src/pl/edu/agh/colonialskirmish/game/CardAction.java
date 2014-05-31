@@ -1,12 +1,14 @@
 package pl.edu.agh.colonialskirmish.game;
 
+import java.io.Serializable;
+
 /**
  * Class contains description of cards special actions
  * 
  * @author Khajiit
  * 
  */
-public class CardAction {
+public class CardAction implements Serializable {
 
 	protected String actionName;
 
