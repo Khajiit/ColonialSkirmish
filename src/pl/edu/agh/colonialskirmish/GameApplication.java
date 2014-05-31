@@ -80,6 +80,10 @@ public class GameApplication extends Application {
 		return gameLog;
 	}
 
+	public GameController getGameController() {
+		return gameController;
+	}
+
 	public void appendGameLog( String newLogMsg ) {
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");

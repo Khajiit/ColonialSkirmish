@@ -331,18 +331,26 @@ public class GameCard implements Card, Serializable {
 		this.cardActionList = cardActionList;
 	}
 
+	public int getInGameId() {
+		return inGameId;
+	}
+
+	public void setInGameId( int inGameId ) {
+		this.inGameId = inGameId;
+	}
+
 	@Override
 	public String toString() {
-		return "GameCard [id=" + id + ", version=" + version + ", name=" + name + ", mainType="
-				+ mainType + ", secondaryType=" + secondaryType + ", cost=" + cost
-				+ ", basicHealth=" + basicHealth + ", health=" + health + ", basicKineticAtt="
-				+ basicKineticAtt + ", basicKineticDef=" + basicKineticDef + ", basicEnergyAtt="
-				+ basicEnergyAtt + ", basicEnergyDef=" + basicEnergyDef + ", basicMissleAtt="
-				+ basicMissleAtt + ", basicMissleDef=" + basicMissleDef + ", kineticAtt="
-				+ kineticAtt + ", kineticDef=" + kineticDef + ", energyAtt=" + energyAtt
-				+ ", energyDef=" + energyDef + ", missleAtt=" + missleAtt + ", missleDef="
-				+ missleDef + ", isActivated=" + isActivated + ", description=" + description
-				+ ", imagePath=" + imagePath + "]";
+		return "GameCard [id=" + id + ", version=" + version + ",inGameId=" + inGameId + " ,name="
+				+ name + ", mainType=" + mainType + ", secondaryType=" + secondaryType + ", cost="
+				+ cost + ", basicHealth=" + basicHealth + ", health=" + health
+				+ ", basicKineticAtt=" + basicKineticAtt + ", basicKineticDef=" + basicKineticDef
+				+ ", basicEnergyAtt=" + basicEnergyAtt + ", basicEnergyDef=" + basicEnergyDef
+				+ ", basicMissleAtt=" + basicMissleAtt + ", basicMissleDef=" + basicMissleDef
+				+ ", kineticAtt=" + kineticAtt + ", kineticDef=" + kineticDef + ", energyAtt="
+				+ energyAtt + ", energyDef=" + energyDef + ", missleAtt=" + missleAtt
+				+ ", missleDef=" + missleDef + ", isActivated=" + isActivated + ", description="
+				+ description + ", imagePath=" + imagePath + "]";
 	}
 
 }

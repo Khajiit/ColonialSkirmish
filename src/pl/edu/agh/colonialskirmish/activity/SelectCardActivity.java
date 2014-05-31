@@ -20,7 +20,7 @@ public class SelectCardActivity extends FragmentActivity {
 
 	public static final int SELECT_CARD_REQUEST = 0;
 
-	public static final String EXTRA_CARD_INDEX = "cardIndexKey";
+	public static final String EXTRA_CARD_ID = "cardIndexKey";
 
 	public static final String EXTRA_EXECUTED_ACTION = "cardExecutedActionKey";
 
@@ -77,7 +77,8 @@ public class SelectCardActivity extends FragmentActivity {
 	public void cardSelected( View view ) {
 		Intent intent = new Intent();
 		int index = viewPager.getCurrentItem();
-		intent.putExtra(EXTRA_CARD_INDEX, index);
+		GameCard card = cards.get(index);
+		intent.putExtra(EXTRA_CARD_ID, card.getInGameId());
 		setResult(RESULT_OK, intent);
 		finish();
 	}

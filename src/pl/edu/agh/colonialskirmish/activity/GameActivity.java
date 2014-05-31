@@ -6,6 +6,7 @@ import pl.edu.agh.colonialskirmish.GameApplication;
 import pl.edu.agh.colonialskirmish.R;
 import pl.edu.agh.colonialskirmish.db.DatabaseContext;
 import pl.edu.agh.colonialskirmish.game.GameCard;
+import pl.edu.agh.colonialskirmish.game.GameController;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -16,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GameActivity extends BaseGameActivity {
 
@@ -98,9 +98,10 @@ public class GameActivity extends BaseGameActivity {
 			Log.d("onActivityResult", "Received select card activity result with code "
 					+ requestCode);
 			if ( resultCode == RESULT_OK ) {
-				int cardIndex = data.getIntExtra(SelectCardActivity.EXTRA_CARD_INDEX, -1);
-				Toast.makeText(this, "Result received, selected card is " + cardIndex,
-						Toast.LENGTH_SHORT).show();
+				int cardInGameId = data.getIntExtra(SelectCardActivity.EXTRA_CARD_ID, -1);
+				GameApplication app = (GameApplication) getApplication();
+				GameController gameController = app.getGameController();
+				gameController.executeCard(cardInGameId);
 			}
 		}
 	}
